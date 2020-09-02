@@ -35,6 +35,16 @@ router.post('/', function (req, res, next) {
   todos.push(todo)
   res.send(todos)
 })
+/* PUT a specific todo. */
+router.put('/:todoId', function (req, res, next) {
+  const todoId = req.params.todoId
+  const todo = todos.find((todo) => todoId === String(todo.id))
+  const otherTodos = todos.filter((todo) => todoId !== String(todo.id))
+  const updatedTodo = { ...todo, ...req.body }
+  todos = [...otherTodos, updatedTodo]
+  res.send(updatedTodo)
+})
+/* PATCH a specific todo. */
 /* DELETE todos listing. */
 router.delete('/', function (req, res, next) {
   todos = []

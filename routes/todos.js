@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
     return
   }
   let todo = {
-    id: todos.length + 1, // 沒有資料庫，先手動新增ID
+    id: Math.max(todos.map((todo) => todo.id)) + 1, // 沒有資料庫，先手動新增ID
     name: req.body.name, // 取得傳送來的name
     done: false // 預設未完成
   }

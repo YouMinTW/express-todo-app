@@ -35,5 +35,17 @@ router.post('/', function (req, res, next) {
   todos.push(todo)
   res.send(todos)
 })
+/* DELETE todos listing. */
+router.delete('/', function (req, res, next) {
+  todos = []
+  res.send(todos)
+})
+/* DELETE a specific todo. */
+router.delete('/:todoId', function (req, res, next) {
+  const todoId = req.params.todoId
+  const updatedTodos = todos.filter((todo) => todoId !== String(todo.id))
+  todos = [...updatedTodos]
+  res.send(todos)
+})
 
 module.exports = router

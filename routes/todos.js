@@ -3,13 +3,21 @@ var router = express.Router()
 
 let todos = [
   { id: 1, name: 'walk dog', done: false },
-  { id: 2, name: 'do laundry', done: false }
+  { id: 2, name: 'do laundry', done: false },
+  { id: 3, name: 'hike mountain', done: false },
+  { id: 4, name: 'read books', done: false },
+  { id: 5, name: 'start coding', done: false },
+  { id: 6, name: 'go sleeping', done: false }
 ]
 
 /*  todos listing. */
 /* GET todos listing. */
 router.get('/', function (req, res, next) {
-  res.send(todos)
+  const query = req.query
+  const start = query.offset ? parseInt(query.offset) : 0
+  const end = query.limit ? parseInt(query.limit) + start : todos.length
+  const filteredTodo = todos.slice(start, end)
+  res.send(filteredTodo)
 })
 /* GET a specific todo. */
 router.get('/:todoId', function (req, res, next) {
